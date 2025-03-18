@@ -1,4 +1,4 @@
-# 🌲 Projeto de Análise de Dados na Silvicultura
+# 🌲 Projeto de Análise de Dados Pinus e Eucalipto
 
 ## 📋 Descrição
 Análise de dados focada em viveiros de Pinus e Eucalipto utilizando dados da Produção da Extração Vegetal e da Silvicultura (PEVS) do IBGE entre 1994-2023.
