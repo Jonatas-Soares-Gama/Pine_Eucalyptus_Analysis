@@ -21,7 +21,7 @@ df = df.rename(columns={'Valor corrigido (mil R$) (real - IPCA 2023)': 'Valor_Co
                         'Parte da planta': 'Parte_Planta',
                         'Espécie': 'Especie',
                         'Unidade de medida PEVS': 'Unidade_Medida_PEVS',
-                        'Valor da produção (mil R$) (nominal)': 'Valor_Producao_Nominal',
+                        'Valor da produção (mil R$) (nominal) ': 'Valor_Producao_Mil_Nominal',
                         'Valor produção (mil R$) (nominal)': 'Valor_Producao',
                         'Fator de correção IPCA': 'Fator_Correcao_IPCA',
                         'Preço médio (R$/t) (nominal)': 'Preco_Medio_Nominal',

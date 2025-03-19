@@ -34,7 +34,8 @@ Análise de dados focada em viveiros de Pinus e Eucalipto utilizando dados da Pr
 ## 🛠️ Tecnologias
 - Python
 - Pandas
-
+- Matplotlib
+- seaborn
 
 ## 🎉 Resultados Esperados
 Insights de mercado, recomendações estratégicas, visualizações e modelos preditivos para auxiliar empresas de viveiros na tomada de decisão.
