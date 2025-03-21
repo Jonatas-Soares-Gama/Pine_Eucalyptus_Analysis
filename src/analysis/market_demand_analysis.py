@@ -1,19 +1,14 @@
 
 #%%
-
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-file_path = "/home/jonatasgama/Desktop/project_silvicultura/data/dados_ibge_rename_columns.csv"
+data_path = '/home/jonatasgama/Desktop/project_silvicultura/data/silver/especie_pinus_eucalipto.csv'
 
-df = pd.read_csv(file_path, sep=";", encoding="utf-8")
+df_filtered = pd.read_csv(data_path, sep=';', encoding='utf-8')
 
-# Filtrar as espécies de interesse
-df_filtered = df[df['Especie'].isin(['Eucalipto', 'Pinus'])]
-
-df_filtered.columns
-
+#%%
 def limpar_valor(valor):
     """
     Limpa e converte valores monetários em string para float.
@@ -31,6 +26,7 @@ def limpar_valor(valor):
             return None
     return valor    
 
+#%%
 def analisar_precos(df):
 
     df = df.copy()
@@ -41,6 +37,8 @@ def analisar_precos(df):
     return precos_anuais
 
 precos_anuais = analisar_precos(df_filtered)
+
+precos_anuais.to_csv('../data/gold/precos_anuais.csv', encoding='utf-8', sep=';', index=False)
 
 print(precos_anuais.head())
 #%%
@@ -66,6 +64,8 @@ def analisar_producao_regional(df):
 
 producao_regional = analisar_producao_regional(df_filtered)
 
+producao_regional.to_csv('../data/gold/producao_regional.csv', encoding='utf-8', sep=';', index=False)
+
 print(producao_regional.head())
 #%%
 
@@ -89,6 +89,8 @@ def analisar_evolucao_producao_regional(df):
     return producao_anuais
 
 producao_anuais = analisar_evolucao_producao_regional(df_filtered)
+
+producao_anuais.to_csv('../data/gold/producao_anuais.csv', encoding='utf-8', sep=';', index=False)
 
 print(producao_anuais.head())
 #%%
