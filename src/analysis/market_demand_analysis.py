@@ -4,9 +4,9 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-data_path = '/home/jonatasgama/Desktop/project_silvicultura/data/silver/especie_pinus_eucalipto.csv'
+data_path = '/home/jonatas-gama/Área de trabalho/projects/Pine_Eucalyptus_Analysis-main/data/silver/especie_pinus_eucalipto.csv'
 
-df_filtered = pd.read_csv(data_path, sep=';', encoding='utf-8')
+df = pd.read_csv(data_path, sep=';', encoding='utf-8')
 
 #%%
 def limpar_valor(valor):
@@ -26,7 +26,9 @@ def limpar_valor(valor):
             return None
     return valor    
 
+
 #%%
+
 def analisar_precos(df):
 
     df = df.copy()
@@ -36,15 +38,14 @@ def analisar_precos(df):
     precos_anuais = df.groupby(['Ano', 'Especie'])['Preco_Medio_Nominal'].mean().reset_index()
     return precos_anuais
 
-precos_anuais = analisar_precos(df_filtered)
-
-precos_anuais.to_csv('../data/gold/precos_anuais.csv', encoding='utf-8', sep=';', index=False)
+precos_anuais = analisar_precos(df)
+precos_anuais.to_csv('/home/jonatas-gama/Área de trabalho/projects/Pine_Eucalyptus_Analysis-main/data/gold/precos_anuais.csv', encoding='utf-8', sep=';', index=False)
 
 print(precos_anuais.head())
 #%%
 
 plt.figure(figsize=(10, 6))
-sns.lineplot(data=analisar_precos(df_filtered), x='Ano', y='Preco_Medio_Nominal', hue='Especie')
+sns.lineplot(data=analisar_precos(df), x='Ano', y='Preco_Medio_Nominal', hue='Especie')
 plt.title('Preço Médio Nominal por Ano e Espécie')
 plt.xlabel('Ano')
 plt.ylabel('Preço Médio Nominal')
@@ -62,15 +63,15 @@ def analisar_producao_regional(df):
 
     return producao_regional
 
-producao_regional = analisar_producao_regional(df_filtered)
+producao_regional = analisar_producao_regional(df)
 
-producao_regional.to_csv('../data/gold/producao_regional.csv', encoding='utf-8', sep=';', index=False)
+producao_regional.to_csv('/home/jonatas-gama/Área de trabalho/projects/Pine_Eucalyptus_Analysis-main/data/gold/producao_regional.csv', encoding='utf-8', sep=';', index=False)
 
 print(producao_regional.head())
 #%%
 
 plt.figure(figsize=(10, 6))
-sns.lineplot(data=analisar_producao_regional(df_filtered), x='Ano', y='Quantidade', hue='UF')
+sns.lineplot(data=analisar_producao_regional(df), x='Ano', y='Quantidade', hue='UF')
 plt.title('Produção Regional por Ano e UF')
 plt.xlabel('Ano')
 plt.ylabel('Produção Regional')
@@ -88,15 +89,15 @@ def analisar_evolucao_producao_regional(df):
 
     return producao_anuais
 
-producao_anuais = analisar_evolucao_producao_regional(df_filtered)
+producao_anuais = analisar_evolucao_producao_regional(df)
 
-producao_anuais.to_csv('../data/gold/producao_anuais.csv', encoding='utf-8', sep=';', index=False)
+producao_anuais.to_csv('/home/jonatas-gama/Área de trabalho/projects/Pine_Eucalyptus_Analysis-main/data/gold/producao_anuais.csv', encoding='utf-8', sep=';', index=False)
 
 print(producao_anuais.head())
 #%%
 
 plt.figure(figsize=(10, 6))
-sns.lineplot(data=analisar_evolucao_producao_regional(df_filtered), x='Ano', y='Quantidade', hue='Especie')
+sns.lineplot(data=analisar_evolucao_producao_regional(df), x='Ano', y='Quantidade', hue='Especie')
 plt.title('Evolução da Produção por Ano e Espécie')
 plt.xlabel('Ano')
 plt.ylabel('Produção')
