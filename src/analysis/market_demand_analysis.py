@@ -8,6 +8,7 @@ data_path = '/home/jonatas-gama/Área de trabalho/projects/Pine_Eucalyptus_Analy
 
 df = pd.read_csv(data_path, sep=';', encoding='utf-8')
 
+df['Preco_Medio_Corrigido_IPCA']
 #%%
 def limpar_valor(valor):
     """
@@ -33,9 +34,7 @@ def analisar_precos(df):
 
     df = df.copy()
 
-    df['Preco_Medio_Nominal'] = df['Preco_Medio_Nominal'].apply(limpar_valor)
-
-    precos_anuais = df.groupby(['Ano', 'Especie'])['Preco_Medio_Nominal'].mean().reset_index()
+    precos_anuais = df.groupby(['Ano', 'Especie', 'Quantida'])['Preco_Medio_Corrigido_IPCA'].mean().reset_index()
     return precos_anuais
 
 precos_anuais = analisar_precos(df)
@@ -59,7 +58,7 @@ def analisar_producao_regional(df):
     # Limpa e converte valores monetários em string para float.
     df['Quantidade'] = df['Quantidade'].apply(limpar_valor)
     # Agrupa a produção por ano e UF
-    producao_regional = df.groupby(['Ano', 'UF'])['Quantidade'].sum().reset_index()
+    producao_regional = df.groupby(['Ano', 'UF', 'Especie', 'Grupo', 'Uso'])['Quantidade'].sum().reset_index()
 
     return producao_regional
 

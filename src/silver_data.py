@@ -55,7 +55,9 @@ def update_values(column1: float, column2: float, column3: float) -> float:
     return df
 
 df_filtered = update_values(1.0506, 1.0506, 1.0506)
+df_filtered['Quantidade'] = df_filtered['Quantidade'].astype(int)
 
+df_filtered['Quantidade'].dtype 
 df_filtered.head()
 
 #%%
