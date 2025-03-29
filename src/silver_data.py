@@ -2,6 +2,7 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
+import numpy as np
 
 file_path = "/home/jonatas-gama/Área de trabalho/projects/Pine_Eucalyptus_Analysis-main/data/raw/dados_ibge_rename_columns.csv"
 
@@ -26,8 +27,10 @@ def limpar_valor(valor):
         except ValueError:  # Se não for possível converter, retorna None
             print(f"Não foi possível converter o valor: {valor}")   
             return None
-    return valor  
+    return valor 
 
+#%%
+df_filtered.columns
 #%%
 
 def convert_to_float(df):
@@ -57,8 +60,21 @@ def update_values(column1: float, column2: float, column3: float) -> float:
 df_filtered = update_values(1.0506, 1.0506, 1.0506)
 df_filtered['Quantidade'] = df_filtered['Quantidade'].astype(int)
 
-df_filtered['Quantidade'].dtype 
 df_filtered.head()
+
+#%%
+def truncando_float(df_filtered):
+    df_filtered = df_filtered.copy()
+
+    df_filtered['Valor_Corrigido_IPCA_Mil_R$'] = np.trunc(df_filtered['Valor_Corrigido_IPCA_Mil_R$'] * 100) / 100
+    df_filtered['Preco_Medio_Corrigido_IPCA'] = np.trunc(df_filtered['Preco_Medio_Corrigido_IPCA'] * 100) / 100
+    df_filtered['Fator_Correcao_IPCA'] = np.trunc(df_filtered['Fator_Correcao_IPCA'] * 100) / 100
+    return df_filtered
+df_filtered = truncando_float(df_filtered)
+
+df_filtered.head()
+
+
 
 #%%
 
