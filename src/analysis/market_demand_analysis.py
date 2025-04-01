@@ -34,7 +34,11 @@ def analisar_precos(df):
 
     df = df.copy()
 
-    precos_anuais = df.groupby(['Ano', 'Especie', 'Quantida'])['Preco_Medio_Corrigido_IPCA'].mean().reset_index()
+    precos_anuais = df.groupby(['Ano', 'Especie']).agg({
+        'Quantidade' : 'sum',
+        'Valor_Corrigido_IPCA_Mil_R$': 'sum'
+    }).reset_index()
+    
     return precos_anuais
 
 precos_anuais = analisar_precos(df)
@@ -44,7 +48,7 @@ print(precos_anuais.head())
 #%%
 
 plt.figure(figsize=(10, 6))
-sns.lineplot(data=analisar_precos(df), x='Ano', y='Preco_Medio_Nominal', hue='Especie')
+sns.lineplot(data=analisar_precos(df), x='Ano', y='Valor_Corrigido_IPCA_Mil_R$', hue='Especie')
 plt.title('Preço Médio Nominal por Ano e Espécie')
 plt.xlabel('Ano')
 plt.ylabel('Preço Médio Nominal')
