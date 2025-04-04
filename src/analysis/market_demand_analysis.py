@@ -46,40 +46,39 @@ precos_anuais.to_csv('/home/jonatas-gama/Área de trabalho/projects/Pine_Eucalyp
 
 print(precos_anuais.head())
 #%%
-
-plt.figure(figsize=(10, 6))
-sns.lineplot(data=analisar_precos(df), x='Ano', y='Valor_Corrigido_IPCA_Mil_R$', hue='Especie')
-plt.title('Preço Médio Nominal por Ano e Espécie')
-plt.xlabel('Ano')
-plt.ylabel('Preço Médio Nominal')
-plt.legend(title='Espécie')
-plt.show()
-
-#%%
-def analisar_producao_regional(df):
+def analisar_producao_regional_pinus(df):
     # Cria uma cópia do dataframe para evitar modificações no original
     df = df.copy()
-    # Limpa e converte valores monetários em string para float.
-    df['Quantidade'] = df['Quantidade'].apply(limpar_valor)
-    # Agrupa a produção por ano e UF
     producao_regional = df.groupby(['Ano', 'UF', 'Especie', 'Grupo', 'Uso'])['Quantidade'].sum().reset_index()
 
     return producao_regional
 
-producao_regional = analisar_producao_regional(df)
+producao_regional = analisar_producao_regional_pinus(df)
 
-producao_regional.to_csv('/home/jonatas-gama/Área de trabalho/projects/Pine_Eucalyptus_Analysis-main/data/gold/producao_regional.csv', encoding='utf-8', sep=';', index=False)
+producao_regional = producao_regional.sort_values(by=['Quantidade'], ascending=False)
 
-print(producao_regional.head())
+producao_regional = producao_regional[producao_regional['Especie'] == 'Pinus']
+
+
+producao_regional.to_csv('/home/jonatas-gama/Área de trabalho/projects/Pine_Eucalyptus_Analysis-main/data/gold/producao_regional_pinus.csv', encoding='utf-8', sep=';', index=False)
+
 #%%
+def analisar_producao_regional_eucalipto(df):
+    # Cria uma cópia do dataframe para evitar modificações no original
+    df = df.copy()
+    producao_regional = df.groupby(['Ano', 'UF', 'Especie', 'Grupo', 'Uso'])['Quantidade'].sum().reset_index()
 
-plt.figure(figsize=(10, 6))
-sns.lineplot(data=analisar_producao_regional(df), x='Ano', y='Quantidade', hue='UF')
-plt.title('Produção Regional por Ano e UF')
-plt.xlabel('Ano')
-plt.ylabel('Produção Regional')
-plt.legend(title='UF')
-plt.show()
+    return producao_regional
+
+producao_regional_eucalipto = analisar_producao_regional_eucalipto(df)
+
+producao_regional_eucalipto = producao_regional_eucalipto.sort_values(by=['Quantidade'], ascending=False)
+
+producao_regional_eucalipto = producao_regional_eucalipto[producao_regional_eucalipto['Especie'] == 'Eucalipto']
+
+
+producao_regional.to_csv('/home/jonatas-gama/Área de trabalho/projects/Pine_Eucalyptus_Analysis-main/data/gold/producao_regional_Eucalipto.csv', encoding='utf-8', sep=';', index=False)
+
 
 # %%
 def analisar_evolucao_producao_regional(df):
