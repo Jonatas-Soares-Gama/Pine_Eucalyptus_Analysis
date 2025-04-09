@@ -1,13 +1,12 @@
 
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
+
 
 data_path = '/home/jonatas-gama/Área de trabalho/projects/Pine_Eucalyptus_Analysis-main/data/silver/especie_pinus_eucalipto.csv'
 
 df = pd.read_csv(data_path, sep=';', encoding='utf-8')
 
-def limpar_valor(valor):
+def clean_value(valor):
     """
     Limpa e converte valores monetários em string para float.
     Remove separadores de milhar (pontos) e converte vírgulas para pontos decimais.
@@ -30,8 +29,8 @@ def convert_to_float(df):
 
     df = df.copy()
 
-    df['Valor_Corrigido_IPCA_Mil_R$'] = df['Valor_Corrigido_IPCA_Mil_R$'].apply(limpar_valor)
-    df['Preco_Medio_Corrigido_IPCA'] = df['Preco_Medio_Corrigido_IPCA'].apply(limpar_valor)
+    df['Valor_Corrigido_IPCA_Mil_R$'] = df['Valor_Corrigido_IPCA_Mil_R$'].apply(clean_value)
+    df['Preco_Medio_Corrigido_IPCA'] = df['Preco_Medio_Corrigido_IPCA'].apply(clean_value)
 
     return df
 
