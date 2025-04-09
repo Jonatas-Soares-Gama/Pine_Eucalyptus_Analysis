@@ -1,4 +1,4 @@
-#%%
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -6,13 +6,6 @@ import seaborn as sns
 data_path = '/home/jonatas-gama/Área de trabalho/projects/Pine_Eucalyptus_Analysis-main/data/silver/especie_pinus_eucalipto.csv'
 
 df = pd.read_csv(data_path, sep=';', encoding='utf-8')
-
-df.columns.to_list()
-#%%
-
-df['Grupo'].unique()
-
-#%%
 
 def limpar_valor(valor):
     """
@@ -30,11 +23,8 @@ def limpar_valor(valor):
             print(f"Não foi possível converter o valor: {valor}")   
             return None
     return valor   
-#%%
 
 comparative_analysis = df[['UF', 'Ano', 'Especie', 'Grupo', 'Uso', 'Quantidade', 'Valor_Corrigido_IPCA_Mil_R$', 'Preco_Medio_Corrigido_IPCA']]
-
-comparative_analysis.head()
 
 def convert_to_float(df):
 
@@ -47,9 +37,6 @@ def convert_to_float(df):
 
 comparative_analysis = convert_to_float(comparative_analysis)
 
-comparative_analysis.head()
-
-# %%
 def update_values(column1: float, column2: float) -> float:
 
     df = comparative_analysis.copy()
@@ -60,12 +47,8 @@ def update_values(column1: float, column2: float) -> float:
     return df
 
 comparative_analysis = update_values(1.0506, 1.0506)
-comparative_analysis.head()
-
-#%%
 
 table_comparative_analysis = comparative_analysis.to_csv('/home/jonatas-gama/Área de trabalho/projects/Pine_Eucalyptus_Analysis-main/data/gold/update_values_comparative_analysis_2025.csv', encoding='utf-8',sep=';', index=False)
 
-#%%
 
 

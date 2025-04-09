@@ -1,9 +1,7 @@
-#%%
+
 import pandas as pd
 import chardet
-import matplotlib.pyplot as plt
 
-#%%
 file_path = '/home/jonatasgama/Desktop/project_silvicultura/data/raw/dados_ibge_94-23.csv'
 
 with open(file_path, "rb") as f:
@@ -28,11 +26,9 @@ df = df.rename(columns={'Valor corrigido (mil R$) (real - IPCA 2023)': 'Valor_Co
                         })
 
 df_rename = df.to_csv('/home/jonatasgama/Desktop/project_silvicultura/data/raw/dados_ibge_rename_columns.csv', encoding='utf-8',sep=';', index=False)
-#%%
 
-df_rename
+print(df_rename)
 
-#%%
 
 
 
