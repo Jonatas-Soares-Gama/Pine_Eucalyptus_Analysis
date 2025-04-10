@@ -50,14 +50,14 @@ def analyze_regional_pine_production(df):
 
     return producao_regional
 
-producao_regional = analyze_regional_pine_production(df)
+regional_production_pinus = analyze_regional_pine_production(df)
 
-producao_regional = producao_regional.sort_values(by=['Quantidade'], ascending=False)
+regional_production_pinus = regional_production_pinus.sort_values(by=['Quantidade'], ascending=False)
 
-producao_regional = producao_regional[producao_regional['Especie'] == 'Pinus']
+regional_production_pinus = regional_production_pinus[regional_production_pinus['Especie'] == 'Pinus']
 
 
-producao_regional.to_csv('/home/jonatas-gama/Área de trabalho/projects/Pine_Eucalyptus_Analysis-main/data/gold/producao_regional_pinus.csv', encoding='utf-8', sep=';', index=False)
+regional_production_pinus.to_csv('/home/jonatas-gama/Área de trabalho/projects/Pine_Eucalyptus_Analysis-main/data/gold/producao_regional_pinus.csv', encoding='utf-8', sep=';', index=False)
 
 def analyze_regional_eucalyptus_production(df):
     # Cria uma cópia do dataframe para evitar modificações no original
@@ -66,14 +66,14 @@ def analyze_regional_eucalyptus_production(df):
 
     return producao_regional
 
-producao_regional_eucalipto = analyze_regional_eucalyptus_production(df)
+regional_production_eucalyptus = analyze_regional_eucalyptus_production(df)
 
-producao_regional_eucalipto = producao_regional_eucalipto.sort_values(by=['Quantidade'], ascending=False)
+regional_production_eucalyptus = regional_production_eucalyptus.sort_values(by=['Quantidade'], ascending=False)
 
-producao_regional_eucalipto = producao_regional_eucalipto[producao_regional_eucalipto['Especie'] == 'Eucalipto']
+regional_production_eucalyptus = regional_production_eucalyptus[regional_production_eucalyptus['Especie'] == 'Eucalipto']
 
 
-producao_regional.to_csv('/home/jonatas-gama/Área de trabalho/projects/Pine_Eucalyptus_Analysis-main/data/gold/producao_regional_Eucalipto.csv', encoding='utf-8', sep=';', index=False)
+regional_production_eucalyptus.to_csv('/home/jonatas-gama/Área de trabalho/projects/Pine_Eucalyptus_Analysis-main/data/gold/producao_regional_Eucalipto.csv', encoding='utf-8', sep=';', index=False)
 
 def analyze_evolution_of_regional_production(df):
     # Cria uma cópia do dataframe para evitar modificações no original
@@ -81,12 +81,12 @@ def analyze_evolution_of_regional_production(df):
     # Limpa e converte valores monetários em string para float.
     df['Quantidade'] = df['Quantidade'].apply(clean_value)
 
-    producao_anuais = df.groupby(['Ano', 'Especie'])['Quantidade'].sum().reset_index()
+    annual_production = df.groupby(['Ano', 'Especie'])['Quantidade'].sum().reset_index()
 
-    return producao_anuais
+    return annual_production
 
-producao_anuais = analyze_evolution_of_regional_production(df)
+annual_production = analyze_evolution_of_regional_production(df)
 
-producao_anuais.to_csv('/home/jonatas-gama/Área de trabalho/projects/Pine_Eucalyptus_Analysis-main/data/gold/producao_anuais.csv', encoding='utf-8', sep=';', index=False)
+annual_production.to_csv('/home/jonatas-gama/Área de trabalho/projects/Pine_Eucalyptus_Analysis-main/data/gold/producao_anuais.csv', encoding='utf-8', sep=';', index=False)
 
-print(producao_anuais.head())
+print(annual_production.head())
